@@ -1,15 +1,3 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { Dog } from '../schema/dogs.schema';
 
-export class DogRequestDto {
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  password: string;
-
-  @IsString()
-  @IsNotEmpty()
-  name: string;
-}
+export class DogRequestDto extends Dog {}
