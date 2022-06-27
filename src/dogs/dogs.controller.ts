@@ -1,33 +1,35 @@
 import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
+import { DogsService } from './dogs.service';
 import { DogRequestDto } from './dto/dogs.request.dto';
 
 @UseInterceptors(new SuccessInterceptor())
 @Controller('dogs')
 export class DogsController {
-	@Get()
-	getCurrentDog() {
-		return 'current dog';
-	}
+    constructor(private readonly dogsService: DogsService) {}
 
-	@Post()
-	async signUp(@Body() body: DogRequestDto) {
-		console.log(body);
-		return 'signup';
-	}
+    @Get()
+    getCurrentDog() {
+        return 'current dog';
+    }
 
-	@Post('login')
-	logIn() {
-		return 'login';
-	}
+    @Post()
+    async signUp(@Body() body: DogRequestDto) {
+        return await this.dogsService.signUp(body);
+    }
 
-	@Post('logout')
-	logOut() {
-		return 'logout';
-	}
+    @Post('login')
+    logIn() {
+        return 'login';
+    }
 
-	@Post('upload/dogs')
-	uploadDogImg() {
-		return 'upload dog image';
-	}
+    @Post('logout')
+    logOut() {
+        return 'logout';
+    }
+
+    @Post('upload/dogs')
+    uploadDogImg() {
+        return 'upload dog image';
+    }
 }
