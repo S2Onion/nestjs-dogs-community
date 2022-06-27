@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
+import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 import { DogRequestDto } from './dto/dogs.request.dto';
 
+@UseInterceptors(new SuccessInterceptor())
 @Controller('dogs')
 export class DogsController {
 	@Get()
